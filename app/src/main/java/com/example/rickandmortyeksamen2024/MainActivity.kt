@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.rickandmortyeksamen2024.screens.showcharacter.ShowCharacterScreen
 import com.example.rickandmortyeksamen2024.screens.showcharacter.ShowCharacterViewModel
 import com.example.rickandmortyeksamen2024.ui.theme.RickAndMortyEksamen2024Theme
@@ -31,4 +32,5 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 }
