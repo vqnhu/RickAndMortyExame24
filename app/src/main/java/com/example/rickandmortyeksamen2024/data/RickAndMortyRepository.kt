@@ -35,6 +35,18 @@ object RickAndMortyRepository {
         } catch (e: Exception) {
             return null
         }
+    }
 
+    suspend fun getAllCharacters(): List<Character>? {
+        return try {
+            val response = _rickAndMortyService.getAllCharacters() // Ensure this endpoint exists in your service
+            if (response.isSuccessful) {
+                response.body()?.results // Access the results from the CharacterList
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
     }
 }

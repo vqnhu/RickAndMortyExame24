@@ -9,4 +9,8 @@ interface RickAndMortyService {
     suspend fun getCharacterById(
         @Path("id") id: Int
     ) : Response<Character>
+
+
+    @GET("character")
+    suspend fun getAllCharacters(): Response<CharacterList> // This fetches all characters
 }
