@@ -1,23 +1,19 @@
 package com.example.rickandmortyeksamen2024.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
+import com.example.rickandmortyeksamen2024.data.Character
 
 @Composable
 fun CharacterItem(character: Character) {
-
     Column {
         Text(text = character.name)
-        //AsyncImage
-        Text(text = character.species)
-        Text(text = "hahaha")
+        AsyncImage(
+            model = character.image,
+            contentDescription = "Image of ${character.name}"
+        )
+        Text(text = character.species) // Displays the species if needed
     }
 }
-
-
-
-
