@@ -16,4 +16,5 @@ fun CharacterItem(character: Character) {
         )
         Text(text = character.species) // Displays the species if needed
     }
+    /// OBS
 }
