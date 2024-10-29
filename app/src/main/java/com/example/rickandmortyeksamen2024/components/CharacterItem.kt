@@ -14,6 +14,7 @@ fun CharacterItem(character: Character) {
         Text(text = character.name)
         //AsyncImage
         Text(text = character.species)
+        Text(text = "hahaha")
     }
 }
 
