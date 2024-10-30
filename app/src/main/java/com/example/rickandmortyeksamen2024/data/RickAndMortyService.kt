@@ -5,12 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RickAndMortyService {
-    @GET("character/{id}")
-    suspend fun getCharacterById(
-        @Path("id") id: Int
-    ) : Response<Character>
-
-
-    @GET("character")
+    @GET("character/?format=json")
     suspend fun getAllCharacters(): Response<CharacterList> // This fetches all characters
 }

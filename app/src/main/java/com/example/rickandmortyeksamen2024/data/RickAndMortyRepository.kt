@@ -15,38 +15,25 @@ object RickAndMortyRepository {
 
     private val _retrofit = Retrofit.Builder()
         .client(_okHttpClient)
-        .baseUrl("https://rickandmortyapi.com/api")
+        .baseUrl("https://rickandmortyapi.com/api/")
         .addConverterFactory(
             GsonConverterFactory.create()
         ).build()
 
     private val _rickAndMortyService = _retrofit.create(RickAndMortyService::class.java)
 
-    suspend fun getCharacterById(id: Int) : Character? {
-
-        try{
-            val response = _rickAndMortyService.getCharacterById(id)
-
-            if(response.isSuccessful) {
-                return response.body()
-            } else {
-                return null
-            }
-        } catch (e: Exception) {
-            return null
-        }
-    }
 
     suspend fun getAllCharacters(): List<Character>? {
-        return try {
+        try {
             val response = _rickAndMortyService.getAllCharacters() // Ensure this endpoint exists in your service
+
             if (response.isSuccessful) {
-                response.body()?.results // Access the results from the CharacterList
+                return response.body()?.results ?: emptyList() // Access the results from the CharacterList
             } else {
-                null
+                return emptyList()
             }
         } catch (e: Exception) {
-            null
+            return emptyList()
         }
     }
 }

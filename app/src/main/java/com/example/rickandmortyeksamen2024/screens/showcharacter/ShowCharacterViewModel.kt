@@ -7,39 +7,19 @@ import com.example.rickandmortyeksamen2024.data.Character
 import com.example.rickandmortyeksamen2024.data.RickAndMortyRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class ShowCharacterViewModel : ViewModel() {
-    private val _characters = MutableStateFlow<List<Character>>(emptyList())
-    val characters: StateFlow<List<Character>> get() = _characters
+    // En ViewModel har 1 eller flere states; state for produkt
+    private val _searchedCharacter = MutableStateFlow<Character?>(null)
+    val searchedCharacter = _searchedCharacter.asStateFlow()
 
-    private val _isLoading = MutableStateFlow<Boolean>(false)
-    val isLoading: StateFlow<Boolean> get() = _isLoading
 
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?> get() = _error
-
-    private var displayedCount = 10 // Number of characters to display
-
-    fun loadAllCharacters() {
-        _isLoading.value = true
+    fun setSearchedCharacter(character: Character): List<Character>{ // lage en funksjon/metode som oppdaterer state - her skal den ta imot id fra screen og få tak i produktet
         viewModelScope.launch {
-            try {
-                val fetchedCharacters = RickAndMortyRepository.getAllCharacters()
-                _characters.value = fetchedCharacters ?: emptyList()
-            } catch (e: Exception) {
-                _error.value = "Failed to load characters"
-            } finally {
-                _isLoading.value = false
-            }
-        }
-    }
-
-    fun loadMoreCharacters() {
-        displayedCount += 10 // Increase the count
-        _characters.value?.let { currentList ->
-            val newList = currentList.take(displayedCount)
-            _characters.value = newList // Update the StateFlow with new list
+            // etter endring blir det "emitet" til composable screen
+            _searchedCharacter.value = RickAndMortyRepository.getAllCharacters(character)
         }
     }
 }
