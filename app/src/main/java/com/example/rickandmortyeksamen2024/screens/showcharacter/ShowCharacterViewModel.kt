@@ -16,10 +16,10 @@ class ShowCharacterViewModel : ViewModel() {
     val searchedCharacter = _searchedCharacter.asStateFlow()
 
 
-    fun setSearchedCharacter(character: Character): List<Character>{ // lage en funksjon/metode som oppdaterer state - her skal den ta imot id fra screen og få tak i produktet
+    fun setSearchedCharacter() : List<Character>? { // lage en funksjon/metode som oppdaterer state - her skal den ta imot id fra screen og få tak i produktet
         viewModelScope.launch {
             // etter endring blir det "emitet" til composable screen
-            _searchedCharacter.value = RickAndMortyRepository.getAllCharacters(character)
+            _searchedCharacter.value = RickAndMortyRepository.getAllCharacters(Character)
         }
     }
 }
