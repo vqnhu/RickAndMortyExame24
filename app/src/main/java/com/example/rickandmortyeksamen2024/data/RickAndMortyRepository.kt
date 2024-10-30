@@ -23,7 +23,6 @@ object RickAndMortyRepository {
     private val _rickAndMortyService = _retrofit.create(RickAndMortyService::class.java)
 
     suspend fun getCharacterById(id: Int) : Character? {
-
         try{
             val response = _rickAndMortyService.getCharacterById(id)
 

@@ -13,24 +13,18 @@ class ShowCharacterViewModel : ViewModel() {
     private val _characters = MutableStateFlow<List<Character>>(emptyList())
     val characters: StateFlow<List<Character>> get() = _characters
 
-    private val _isLoading = MutableStateFlow<Boolean>(false)
-    val isLoading: StateFlow<Boolean> get() = _isLoading
 
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?> get() = _error
 
     private var displayedCount = 10 // Number of characters to display
 
     fun loadAllCharacters() {
-        _isLoading.value = true
         viewModelScope.launch {
             try {
                 val fetchedCharacters = RickAndMortyRepository.getAllCharacters()
                 _characters.value = fetchedCharacters ?: emptyList()
             } catch (e: Exception) {
-                _error.value = "Failed to load characters"
-            } finally {
-                _isLoading.value = false
+                // Handle error
+                _characters.value.isEmpty();
             }
         }
     }
