@@ -23,7 +23,7 @@ object RickAndMortyRepository {
     private val _rickAndMortyService = _retrofit.create(RickAndMortyService::class.java)
 
 
-    suspend fun getAllCharacters(): List<Character>? {
+    suspend fun getAllCharacters() : List<Character>{
         try {
             val response = _rickAndMortyService.getAllCharacters() // Ensure this endpoint exists in your service
 
