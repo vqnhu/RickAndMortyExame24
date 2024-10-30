@@ -14,7 +14,6 @@ fun CharacterItem(character: Character) {
             model = character.image,
             contentDescription = "Image of ${character.name}"
         )
-        Text(text = character.species) // Displays the species if needed
+        Text(text = character.species)
     }
-    /// OBS
 }
